@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  ai_dev:
+  llm_dev:
     build: 
       context: .
       dockerfile: Dockerfile
@@ -13,14 +11,10 @@ services:
       - TRANSFORMERS_CACHE=/app/.cache/huggingface
     deploy:
       resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+        limits:
+          memory: 8G
     ports:
-      - "8888:8888"  # For Jupyter Notebook if needed
-    command: python3
+      - "8888:8888"  
 
 volumes:
   huggingface_cache:

@@ -1,19 +1,18 @@
 # test_setup.py
-from langchain import hub
-from transformers import pipeline
+from langchain_huggingface import HuggingFaceEndpoint
 
-def test_imports():
-    print("Testing LangChain import...")
-    # Test LangChain
-    prompt = hub.pull("rlm/text-question-answer")
-    print("LangChain import successful!")
+# Set your Hugging Face API token 
+huggingfacehub_api_token = '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'
 
-    print("\nTesting Hugging Face Transformers import...")
-    # Test Transformers
-    classifier = pipeline("sentiment-analysis")
-    result = classifier("Hello, world!")
-    print("Transformers import successful!")
-    print(f"Test classification result: {result}")
+def test_prompts():
+    # Define the LLM
+    llm = HuggingFaceEndpoint(repo_id='tiiuae/falcon-7b-instruct', huggingfacehub_api_token=huggingfacehub_api_token)
+
+    # Predict the words following the text in question
+    question = 'Whatever you do, take care of your shoes'
+    output = llm.invoke(question)
+
+    print(output)
 
 if __name__ == "__main__":
-    test_imports()
+    test_prompts()
