@@ -9,12 +9,13 @@ services:
     environment:
       - PYTHONPATH=/app
       - TRANSFORMERS_CACHE=/app/.cache/huggingface
-    deploy:
-      resources:
-        limits:
-          memory: 8G
-    ports:
-      - "8888:8888"  
+      # Add environment variables from .env file
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # - OTHER_API_KEY=${OTHER_API_KEY}
+    env_file:
+      - .env
 
 volumes:
   huggingface_cache:

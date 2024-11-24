@@ -9,8 +9,6 @@ def load_env_variables():
     required_vars = [
         'OPENAI_API_KEY',
         'HUGGINGFACE_API_KEY',
-        'ANTHROPIC_API_KEY',
-        'OTHER_API_KEY'
     ]
     
     missing_vars = [var for var in required_vars if not os.getenv(var)]
